@@ -1,0 +1,138 @@
+body{
+    padding: 0;
+    margin: 0;
+    
+
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.logo{
+    color: #FEFCFE;
+    margin-left: 40px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+}
+span{
+    color: #E7A030;
+}
+ul{
+    margin-top: 45px;
+}
+
+li{
+    display: inline-block;
+    font-size: 25px;
+    margin-right: 40px;
+  
+}   
+a{
+    text-decoration: none;
+    color: #FEFCFE;
+    font-family: 'Poppins', sans-serif;
+
+}
+.navbar ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #FEFCFE;
+    display: block;
+    margin: auto;
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+    transition: 0.5s;
+}
+
+a:hover{
+    color: #E7A030;
+}
+.search{
+    display: flex; 
+    align-items: center; 
+    margin-right: 40px;
+}
+input{
+    border-radius: 5px;
+    width: 200px;
+    height: 30px;
+    background-color: transparent;
+    border-color: #E7A030;
+    outline: none;
+}
+::placeholder {
+   color: #FEFCFE;
+}
+
+.material-symbols-outlined {
+    margin-left: 5px; 
+}
+
+.landingpage{
+    background-size: cover;
+	background-position: center;
+	height: 100vh;
+	width: 100%;
+	position: relative;
+    animation: slider 12.5s infinite;
+    background-color: rgba(12, 4, 4, 0.5);
+
+}
+
+.welcomeMessage {
+    display: flex;
+    flex-direction: column;
+    color: #FEFCFE;
+}
+
+.welcomeMessage h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 67px;
+    margin-left: 40px;
+    margin-bottom: 0px;
+}
+
+.welcomeMessage h2 {
+    margin-left: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    margin-top: 0px;
+}
+button{
+    background-color: #E7A030;
+    width: 200px;
+    height: 40px;
+    outline: none;
+    border-radius: 10px;
+    margin-left: 40px;
+    text-align: center;
+    color: #FEFCFE;
+    font-size: 20px;
+}
+
+@keyframes slider {
+    0% {
+      background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(images/xo.jpg);
+      background-position: 100% 0;
+    }
+    33.33% {
+      background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(images/poi.webp);
+      background-position: 100% 0;
+    }
+    66.66% {
+      background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(images/100.jpg);
+      background-position: 100% 0;
+    }
+    100% {
+      background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(images/xo.jpg);
+      background-position: 0 0;
+    }
+  }
+  
+  
+  
+  

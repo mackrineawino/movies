@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Search Web App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .search-container {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .search-input {
+      flex-grow: 1;
+      padding: 8px;
+      font-size: 16px;
+    }
+    
+    .search-button {
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .movie-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .movie {
+      width: 200px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    
+    .movie-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .movie-poster {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    
+    .details-container {
+      display: none;
+      margin-top: 20px;
+    }
+    
+    .details {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Movie Search</h1>
+    
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Enter movie title">
+      <button id="searchButton" class="search-button">Search</button>
+    </div>
+    
+    <div class="movie-container" id="movieContainer"></div>
+    
+    <div class="details-container" id="detailsContainer"></div>
+  </div>
+
+  <script>
+    // DOM elements
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const movieContainer = document.getElementById('movieContainer');
+    const detailsContainer = document.getElementById('detailsContainer');
+    
+    // Event listeners
+    searchButton.addEventListener('click', searchMovie);
+    movieContainer.addEventListener('click', showMovieDetails);
+    
+    // Fetch movie data from API
+    function searchMovie() {
+      const apiKey = 'YOUR_API_KEY'; // Replace with your OMDb API key
+      const searchTerm = searchInput.value;
+      
+      // Clear previous search results
+      movieContainer.innerHTML = '';
+      detailsContainer.innerHTML = '';
+      
+      // Make API request
+      fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.Response === 'True') {
+            displayMovies(data.Search);
+          } else {
+            displayError('No results found.');
+          }
+        })
+        .catch(error => {
+          displayError('An error occurred. Please try again later.');
+        });
+    }
+    
+    // Display movie results
+    function displayMovies(movies) {
+      movies.forEach(movie => {
+        const movieElement = document.createElement('div');
+        movieElement.classList.add('movie');
+        
+        const titleElement = document.createElement('h2');
+        titleElement.classList.add('movie-title');
+        titleElement.textContent = movie.Title;
+        
+        const posterElement = document.createElement('img');
+        posterElement.classList.add('movie-poster');
+        posterElement.src = movie.Poster;
+        
+        const yearElement = document.createElement('p');
+        yearElement.textContent = `Year: ${movie.Year}`;
+        
+        const detailsButton = document.createElement('button');
+        detailsButton.textContent = 'View Details';
+        
+        movieElement.appendChild(titleElement);
+        movieElement.appendChild(posterElement);
+        movieElement.appendChild(yearElement);
+        movieElement.appendChild(detailsButton);
+        
+        movieContainer.appendChild(movieElement);
+      });
+    }
+    
+    // Show movie details
+    function showMovieDetails(event) {
+      if (event.target.tagName === 'BUTTON') {
+        const movieElement = event.target.parentNode;
+        const title = movieElement.querySelector('.movie-title').textContent;
+        
+        fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`)
+          .then(response => response.json())
+          .then(data => {
+            displayMovieDetails(data);
+          })
+          .catch(error => {
+            displayError('An error occurred. Please try again later.');
+          });
+      }
+    }
+    
+    // Display movie details
+    function displayMovieDetails(movie) {
+      detailsContainer.innerHTML = `
+        <h2>${movie.Title}</h2>
+        <p><strong>Plot:</strong> ${movie.Plot}</p>
+        <p><strong>Genre:</strong> ${movie.Genre}</p>
+        <p><strong>Director:</strong> ${movie.Director}</p>
+        <p><strong>Actors:</strong> ${movie.Actors}</p>
+      `;
+    }
+    
+    // Display error message
+    function displayError(message) {
+      const errorElement = document.createElement('p');
+      errorElement.style.color = 'red';
+      errorElement.textContent = message;
+      movieContainer.appendChild(errorElement);
+    }
+  </script>
+</body>
+</html>

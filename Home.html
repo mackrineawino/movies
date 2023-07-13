@@ -1,0 +1,68 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MuviMee</title>
+        <link rel="stylesheet" href="/Home.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+            rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    </head>
+    <body>
+        <div class="landingpage">
+            <div class="navbar">
+                <div class="logo">
+                    <h2>Muv<span>iMee</span></h2>
+                </div>
+
+                <div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Movies</a></li>
+                        <li><a href="#">Series</a></li>
+                    </ul>
+                </div>
+
+                <div class="search">
+                    <input type="text" placeholder="Search">
+                    <span class="material-symbols-outlined">
+                        search
+                        </span>
+                </div>
+
+            </div>
+
+            <div class="welcomeMessage">
+                <h1>Welcome to MuviMee,</h1>
+                <h2> <br /> The home of <span>Unlimited Movies</span> ,<br /> TVs Shows,
+                   <span>& More</span>.</h2>
+                   <button>Catch Up</button>
+            </div>
+        </div>
+        <div class="trending">
+            <div>
+                <img src="" alt="">
+                <h4>{data.Title}</h4>
+            </div>
+
+        </div>
+        <script>
+            fetch("http://www.omdbapi.com/?i=tt3896198&apikey=3ddcd843").
+            then(response =>{
+              return response.json();
+            })
+            .then(data =>{
+                console.log(data.Title)
+            });
+        </script>
+    </body>
+</html>
